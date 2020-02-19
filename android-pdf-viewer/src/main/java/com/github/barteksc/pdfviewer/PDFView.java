@@ -464,7 +464,7 @@ public class PDFView extends RelativeLayout {
 
     @Override
     protected void onDetachedFromWindow() {
-        recycle();
+        //recycle();
         if (renderingHandlerThread != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
                 renderingHandlerThread.quitSafely();
