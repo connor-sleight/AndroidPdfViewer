@@ -1523,10 +1523,12 @@ public class PDFView extends RelativeLayout {
         }
 
         public void load() {
+            Log.e("PDF-VIEW", "LOADING PDF 1");
             if (!hasSize) {
                 waitingDocumentConfigurator = this;
                 return;
             }
+            Log.e("PDF-VIEW", "LOADING PDF 2");
             PDFView.this.recycle();
             PDFView.this.callbacks.setOnLoadComplete(onLoadCompleteListener);
             PDFView.this.callbacks.setOnError(onErrorListener);
@@ -1554,11 +1556,13 @@ public class PDFView extends RelativeLayout {
             PDFView.this.setPageSnap(pageSnap);
             PDFView.this.setPageFling(pageFling);
 
+            Log.e("PDF-VIEW", "LOADING PDF 3");
             if (pageNumbers != null) {
                 PDFView.this.load(documentSource, password, pageNumbers);
             } else {
                 PDFView.this.load(documentSource, password);
             }
+            Log.e("PDF-VIEW", "LOADING PDF 4");
         }
     }
 }
