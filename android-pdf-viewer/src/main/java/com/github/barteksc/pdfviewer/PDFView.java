@@ -415,11 +415,13 @@ public class PDFView extends RelativeLayout {
     }
 
     public void recycle() {
+        Log.e("PDF-VIEW", "Recycle");
         waitingDocumentConfigurator = null;
 
         animationManager.stopAll();
         dragPinchManager.disable();
 
+        Log.e("PDF-VIEW", "Recycle - Stop Tasks");
         // Stop tasks
         if (renderingHandler != null) {
             renderingHandler.stop();
@@ -429,6 +431,7 @@ public class PDFView extends RelativeLayout {
             decodingAsyncTask.cancel(true);
         }
 
+        Log.e("PDF-VIEW", "Recycle - Clear Cache");
         // Clear caches
         cacheManager.recycle();
 
@@ -441,6 +444,8 @@ public class PDFView extends RelativeLayout {
             pdfFile = null;
         }
 
+        Log.e("PDF-VIEW", "Recycle - Set Variables");
+        
         renderingHandler = null;
         scrollHandle = null;
         isScrollHandleInit = false;
@@ -449,6 +454,7 @@ public class PDFView extends RelativeLayout {
         recycled = true;
         callbacks = new Callbacks();
         state = State.DEFAULT;
+        Log.e("PDF-VIEW", "Recycled");
     }
 
     public boolean isRecycled() {
