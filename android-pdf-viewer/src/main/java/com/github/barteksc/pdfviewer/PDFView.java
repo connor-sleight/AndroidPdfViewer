@@ -475,7 +475,6 @@ public class PDFView extends RelativeLayout {
     protected void onDetachedFromWindow() {
         Log.e("PDF-VIEW", "DetachedFromWindow");
         Log.e("PDF-VIEW", "manualRecycling: " + manualRecycling);
-        Log.e("PDF-VIEW", "this.manualRecycling: " + this.manualRecycling);
         if (manualRecycling != true) {
             Log.e("PDF-VIEW", "Recycling...");
             recycle();
@@ -1557,7 +1556,6 @@ public class PDFView extends RelativeLayout {
             }
             Log.e("PDF-VIEW", "Load Before Recycle");
             Log.e("PDF-VIEW", "manualRecycling: " + manualRecycling);
-            Log.e("PDF-VIEW", "this.manualRecycling: " + this.manualRecycling);
             if (manualRecycling != true) {
                 Log.e("PDF-VIEW", "Recycling...");
                 PDFView.this.recycle();
