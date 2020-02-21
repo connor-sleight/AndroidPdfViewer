@@ -1545,7 +1545,11 @@ public class PDFView extends RelativeLayout {
                 return;
             }
             Log.e("PDF-VIEW", "Load Before Recycle");
-            PDFView.this.recycle();
+            if (manualRecycling != true) {
+                Log.e("PDF-VIEW", "Recycling...");
+                PDFView.this.recycle();
+                Log.e("PDF-VIEW", "After Recycle");
+            }
             Log.e("PDF-VIEW", "Load After Recycle");
             PDFView.this.callbacks.setOnLoadComplete(onLoadCompleteListener);
             PDFView.this.callbacks.setOnError(onErrorListener);
