@@ -467,9 +467,14 @@ public class PDFView extends RelativeLayout {
 
     @Override
     protected void onDetachedFromWindow() {
+        Log.e("PDF-VIEW", "DetachedFromWindow");
+        Log.e("PDF-VIEW", "manualRecycling: " + manualRecycling);
         if (manualRecycling != true) {
+            Log.e("PDF-VIEW", "Recycling...");
             recycle();
+            Log.e("PDF-VIEW", "After Recycle");
         }
+        Log.e("PDF-VIEW", "After Check");
         if (renderingHandlerThread != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
                 renderingHandlerThread.quitSafely();
