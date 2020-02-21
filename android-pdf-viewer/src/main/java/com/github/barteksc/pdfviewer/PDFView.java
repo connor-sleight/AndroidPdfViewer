@@ -237,6 +237,9 @@ public class PDFView extends RelativeLayout {
 
     /** Holds info whether view has been added to layout and has width and height */
     private boolean hasSize = false;
+    
+    /** Determines whether or not to recycle the cache */
+    private boolean manualRecycling = false;
 
     /** Holds last used Configurator that should be loaded when view has size */
     private Configurator waitingDocumentConfigurator;
@@ -464,8 +467,9 @@ public class PDFView extends RelativeLayout {
 
     @Override
     protected void onDetachedFromWindow() {
-        //recycle();
-        Log.e("PDF-VIEW", "Calling onDetachedFromWindow Method");
+        if (manualRecycling != true) {
+            recycle();
+        }
         if (renderingHandlerThread != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
                 renderingHandlerThread.quitSafely();
@@ -1523,12 +1527,10 @@ public class PDFView extends RelativeLayout {
         }
 
         public void load() {
-            Log.e("PDF-VIEW", "LOADING PDF 1");
             if (!hasSize) {
                 waitingDocumentConfigurator = this;
                 return;
             }
-            Log.e("PDF-VIEW", "LOADING PDF 2");
             PDFView.this.recycle();
             PDFView.this.callbacks.setOnLoadComplete(onLoadCompleteListener);
             PDFView.this.callbacks.setOnError(onErrorListener);
@@ -1556,13 +1558,11 @@ public class PDFView extends RelativeLayout {
             PDFView.this.setPageSnap(pageSnap);
             PDFView.this.setPageFling(pageFling);
 
-            Log.e("PDF-VIEW", "LOADING PDF 3");
             if (pageNumbers != null) {
                 PDFView.this.load(documentSource, password, pageNumbers);
             } else {
                 PDFView.this.load(documentSource, password);
             }
-            Log.e("PDF-VIEW", "LOADING PDF 4");
         }
     }
 }
