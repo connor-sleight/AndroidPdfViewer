@@ -1220,6 +1220,10 @@ public class PDFView extends RelativeLayout {
     public void enableRenderDuringScale(boolean renderDuringScale) {
         this.renderDuringScale = renderDuringScale;
     }
+    
+    public void enableManualRecycling(boolean enableManualRecycling) {
+        this.manualRecycling = enableManualRecycling;
+    }
 
     public boolean isAntialiasing() {
         return enableAntialiasing;
