@@ -1223,8 +1223,12 @@ public class PDFView extends RelativeLayout {
     
     public void enableManualRecycling(boolean enableManualRecycling) {
         Log.e("PDF-VIEW", "enableManualRecycling BEFORE");
+        Log.e("PDF-VIEW", "enableManualRecycling: " + enableManualRecycling);
+        Log.e("PDF-VIEW", "this.manualRecycling: " + this.manualRecycling);
         this.manualRecycling = enableManualRecycling;
         Log.e("PDF-VIEW", "enableManualRecycling AFTER");
+        Log.e("PDF-VIEW", "enableManualRecycling: " + enableManualRecycling);
+        Log.e("PDF-VIEW", "this.manualRecycling: " + this.manualRecycling);
     }
 
     public boolean isAntialiasing() {
