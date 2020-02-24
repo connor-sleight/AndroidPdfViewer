@@ -415,13 +415,11 @@ public class PDFView extends RelativeLayout {
     }
 
     public void recycle() {
-        Log.e("PDF-VIEW", "Recycle");
         waitingDocumentConfigurator = null;
 
         animationManager.stopAll();
         dragPinchManager.disable();
 
-        Log.e("PDF-VIEW", "Recycle - Stop Tasks");
         // Stop tasks
         if (renderingHandler != null) {
             renderingHandler.stop();
@@ -431,7 +429,6 @@ public class PDFView extends RelativeLayout {
             decodingAsyncTask.cancel(true);
         }
 
-        Log.e("PDF-VIEW", "Recycle - Clear Cache");
         // Clear caches
         cacheManager.recycle();
 
@@ -443,8 +440,6 @@ public class PDFView extends RelativeLayout {
             pdfFile.dispose();
             pdfFile = null;
         }
-
-        Log.e("PDF-VIEW", "Recycle - Set Variables");
         
         renderingHandler = null;
         scrollHandle = null;
@@ -454,7 +449,6 @@ public class PDFView extends RelativeLayout {
         recycled = true;
         callbacks = new Callbacks();
         state = State.DEFAULT;
-        Log.e("PDF-VIEW", "Recycled");
     }
 
     public boolean isRecycled() {
@@ -473,14 +467,10 @@ public class PDFView extends RelativeLayout {
 
     @Override
     protected void onDetachedFromWindow() {
-        Log.e("PDF-VIEW", "DetachedFromWindow");
-        Log.e("PDF-VIEW", "manualRecycling: " + manualRecycling);
         if (manualRecycling != true) {
-            Log.e("PDF-VIEW", "Recycling...");
             recycle();
-            Log.e("PDF-VIEW", "After Recycle");
         }
-        Log.e("PDF-VIEW", "After Check");
+
         if (renderingHandlerThread != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
                 renderingHandlerThread.quitSafely();
@@ -523,7 +513,7 @@ public class PDFView extends RelativeLayout {
         if (swipeVertical) {
             currentXOffset = -relativeCenterPointInStripXOffset * pdfFile.getMaxPageWidth() + w * 0.5f;
             currentYOffset = -relativeCenterPointInStripYOffset * pdfFile.getDocLen(zoom) + h * 0.5f ;
-        }else {
+        } else {
             currentXOffset = -relativeCenterPointInStripXOffset * pdfFile.getDocLen(zoom) + w * 0.5f;
             currentYOffset = -relativeCenterPointInStripYOffset * pdfFile.getMaxPageHeight() + h * 0.5f;
         }
@@ -791,9 +781,7 @@ public class PDFView extends RelativeLayout {
         state = State.ERROR;
         // store reference, because callbacks will be cleared in recycle() method
         OnErrorListener onErrorListener = callbacks.getOnError();
-        Log.e("PDF-VIEW", "LoadError Before Recycle");
         recycle();
-        Log.e("PDF-VIEW", "LoadError After Recycle");
         invalidate();
         if (onErrorListener != null) {
             onErrorListener.onError(t);
@@ -1222,13 +1210,7 @@ public class PDFView extends RelativeLayout {
     }
     
     public void enableManualRecycling(boolean enableManualRecycling) {
-        Log.e("PDF-VIEW", "enableManualRecycling BEFORE");
-        Log.e("PDF-VIEW", "enableManualRecycling: " + enableManualRecycling);
-        Log.e("PDF-VIEW", "this.manualRecycling: " + this.manualRecycling);
         this.manualRecycling = enableManualRecycling;
-        Log.e("PDF-VIEW", "enableManualRecycling AFTER");
-        Log.e("PDF-VIEW", "enableManualRecycling: " + enableManualRecycling);
-        Log.e("PDF-VIEW", "this.manualRecycling: " + this.manualRecycling);
     }
 
     public boolean isAntialiasing() {
@@ -1554,14 +1536,11 @@ public class PDFView extends RelativeLayout {
                 waitingDocumentConfigurator = this;
                 return;
             }
-            Log.e("PDF-VIEW", "Load Before Recycle");
-            Log.e("PDF-VIEW", "manualRecycling: " + manualRecycling);
+            
             if (manualRecycling != true) {
-                Log.e("PDF-VIEW", "Recycling...");
                 PDFView.this.recycle();
-                Log.e("PDF-VIEW", "After Recycle");
             }
-            Log.e("PDF-VIEW", "Load After Recycle");
+
             PDFView.this.callbacks.setOnLoadComplete(onLoadCompleteListener);
             PDFView.this.callbacks.setOnError(onErrorListener);
             PDFView.this.callbacks.setOnDraw(onDrawListener);
