@@ -486,6 +486,10 @@ public class PDFView extends RelativeLayout {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         hasSize = true;
         if (waitingDocumentConfigurator != null) {
+            // if user has enabled manual recycling, run the recycle method on size change (usually orientation)
+            if (manualRecycling == true) {
+                recycle();
+            }
             waitingDocumentConfigurator.load();
         }
         if (isInEditMode() || state != State.SHOWN) {
