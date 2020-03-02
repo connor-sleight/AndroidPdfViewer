@@ -275,7 +275,14 @@ public class PDFView extends RelativeLayout {
 
         Log.e("PDF-VIEW", "Load: 276");
         if (!recycled) {
-            throw new IllegalStateException("Don't call load on a PDF View without recycling it first.");
+            Log.e("PDF-VIEW", "manual recycling:" + manualRecycling);
+            // if user has enabled manual recycling, run the recycle method on size change (usually orientation)
+            // else throw an error
+            if (manualRecycling == true) {
+                recycle();
+            } else {
+                throw new IllegalStateException("Don't call load on a PDF View without recycling it first.");
+            }
         }
 
         recycled = false;
@@ -489,11 +496,6 @@ public class PDFView extends RelativeLayout {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         hasSize = true;
         if (waitingDocumentConfigurator != null) {
-            Log.e("PDF-VIEW", "manual recycling:" + manualRecycling);
-            // if user has enabled manual recycling, run the recycle method on size change (usually orientation)
-            if (manualRecycling == true) {
-                recycle();
-            }
             waitingDocumentConfigurator.load();
         }
         if (isInEditMode() || state != State.SHOWN) {
