@@ -273,6 +273,7 @@ public class PDFView extends RelativeLayout {
 
     private void load(DocumentSource docSource, String password, int[] userPages) {
 
+        Log.e("PDF-VIEW", "Load: 276");
         if (!recycled) {
             throw new IllegalStateException("Don't call load on a PDF View without recycling it first.");
         }
@@ -1539,6 +1540,7 @@ public class PDFView extends RelativeLayout {
         }
 
         public void load() {
+            Log.e("PDF-VIEW", "Start of load");
             if (!hasSize) {
                 waitingDocumentConfigurator = this;
                 return;
@@ -1579,6 +1581,7 @@ public class PDFView extends RelativeLayout {
             } else {
                 PDFView.this.load(documentSource, password);
             }
+            Log.e("PDF-VIEW", "End of load");
         }
     }
 }
