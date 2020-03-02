@@ -272,8 +272,6 @@ public class PDFView extends RelativeLayout {
     }
 
     private void load(DocumentSource docSource, String password, int[] userPages) {
-
-        Log.e("PDF-VIEW", "Load: 276");
         if (!recycled) {
             Log.e("PDF-VIEW", "manual recycling:" + manualRecycling);
             // if user has enabled manual recycling, run the recycle method on size change (usually orientation)
@@ -494,6 +492,7 @@ public class PDFView extends RelativeLayout {
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        Log.e("PDF-VIEW", "Start of size changed");
         hasSize = true;
         if (waitingDocumentConfigurator != null) {
             waitingDocumentConfigurator.load();
@@ -529,6 +528,7 @@ public class PDFView extends RelativeLayout {
         }
         moveTo(currentXOffset,currentYOffset);
         loadPageByOffset();
+        Log.e("PDF-VIEW", "End of size changed");
     }
 
     @Override
