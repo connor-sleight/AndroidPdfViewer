@@ -415,6 +415,7 @@ public class PDFView extends RelativeLayout {
     }
 
     public void recycle() {
+        Log.e("PDF-VIEW", "Start of recycle");
         waitingDocumentConfigurator = null;
 
         animationManager.stopAll();
@@ -449,6 +450,7 @@ public class PDFView extends RelativeLayout {
         recycled = true;
         callbacks = new Callbacks();
         state = State.DEFAULT;
+        Log.e("PDF-VIEW", "End of recycle");
     }
 
     public boolean isRecycled() {
@@ -486,6 +488,7 @@ public class PDFView extends RelativeLayout {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         hasSize = true;
         if (waitingDocumentConfigurator != null) {
+            Log.e("PDF-VIEW", "manual recycling:" + manualRecycling);
             // if user has enabled manual recycling, run the recycle method on size change (usually orientation)
             if (manualRecycling == true) {
                 recycle();
